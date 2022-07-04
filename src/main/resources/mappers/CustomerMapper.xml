@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mpper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.myshop.CustomerMapper">
+
+	<!-- 멤버리스트 -->
+	<select id="CustomerList" resultType="com.myshop.dto.CustomerDTO">
+		select a.*,b.name as 'state_val',c.name as 'grade_val' from customer a
+		inner join codemaster b 
+		on(a.state = b.value and b.code = 'cg')
+		inner join codemaster c 
+		on(a.grade = c.value and c.code = 'cs')
+		order by a.seq desc
+	</select>
+	
+	
+	
+	
+	<!-- 로그인/아이디체크/상세 -->
+	<select id="CustomerInfo" resultType="com.myshop.dto.CustomerDTO">
+		select a.*,b.name as 'state_val',c.name as 'grade_val' from customer a
+		inner join codemaster b
+		on (a.state = b.value and b.code = 'cg')
+		inner join codemaster c 
+		on (a.grade = c.value and c.code = 'cs')
+		where email = #{email}
+	</select>
+	
+	
+	<!-- 로그인 카운트 -->
+	<update id="CustomerLoginCnt">
+		update customer set cnt = cnt + 1 where email = #{email}
+	</update>
+	<!-- 로그인 데이트 -->
+	<update id="CustomerLoginDate">
+		update customer set login_date = now() where email = #{email}
+	</update>
+	
+
+
+	<!-- 가입  -->
+	<insert id="CustomerJoin">
+		insert into customer(email,pw,name,phonenum,addr1,addr2,zipcode,regdate)
+		values(#{email},#{pw},#{name},#{phonenum},#{addr1},#{addr2},#{zipcode},now());
+	</insert>
+	
+
+	
+		<!-- 
+	수정
+	<update id="CustomerEdit">
+		update from customer set pw = #{pw}, name = #{name}, phonenum = #{phonenum}, addr1 = #{addr1}, addr2 = #{addr2}, zipcode = #{zipcode}
+		
+	</update>
+	 -->
+
+</mapper>

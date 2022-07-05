@@ -21,6 +21,17 @@ PUBLIC "-//mybatis.org//DTD Mpper 3.0//EN"
 		where a.seq = #{seq}
 	</select>
 	
+<!-- 공지사항 조회수 -->
+	<update id="NoticeCnt" parameterType="int">
+			update notice set cnt = cnt+1 where seq = #{seq}
+	</update>
+	
+<!-- 공지사항 등록 -->
+	<insert id="NoticeForm">
+		insert into notice(cus_seq,title,content,regdate)
+		values(#{cus_seq},#{title},#{content},now())
+	</insert>
+	
 <!-- 공지사항 수정 -->
 	<update id="NoticeUpdate">
 		update notice set title=#{title }, content=#{content }

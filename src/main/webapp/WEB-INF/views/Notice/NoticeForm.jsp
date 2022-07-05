@@ -138,6 +138,27 @@ response.setCharacterEncoding("utf-8");
             padding: 7px 20px 8px 20px;
             font-size: 14px;
         }
+        <style>
+        input,
+        textarea {
+            border: 1px solid #777;
+            font-size: 0.9em;
+            line-height: 2em;
+            padding-left: 1em;
+            padding-top: 5px;
+        }        .ct_wrap {
+            clear: both;
+            width: 1000px;
+            margin: 100px auto;
+        }        button {
+            padding-top: 7px;
+            width: 150px;
+            height: 30px;
+        }        
+        th {
+  
+        }
+    </style>
         /* 게시판관리 - 공지사항 */
     </style>
 </head>
@@ -150,61 +171,49 @@ response.setCharacterEncoding("utf-8");
             </div>
         </header>
 
-
-        <div id="container">
-            <div id="container_wrap">
-	       <section class="main_wrap">
-					<jsp:include page="./LeftMenu.jsp"/>
-                     <!-- 게시판관리 - 공지사항 -->
-                    <article class="page">
-                        <div class="page_content">
-                            <!-- 검색 -->
-                            <div class="search_box">
-                                <form action="/myapp/board/news_search" method="POST">
-                                    <select name="search_type">
-                                        <option value="1">제목</option>
-                                        <option value="2">내용</option>
-                                    </select>
-                                    <input type="hidden" id="type" name="type" value="2">
-                                    <input type="text" id="search" name="search">
-                                    <button type="submit" class="btn_clear">검색</button>
-                                </form>
-                            </div>
-                            <!-- /검색 -->
-                            <!-- 제품 목록 -->
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>no</th>
-                                        <th>제목</th>
-                                        <th>조회수</th>
-                                        <th>작성일</th>
-                                        <th>작성자</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<c:forEach items="${List }" var= "DTO">
-                                    <tr>
-                                        <td>${DTO.seq }</td>
-                                        <td><a href="${path }/Notice/NoticeMore?seq=${DTO.seq }">${DTO.title }</a></td>
-                                        <td>${DTO.cnt }</td>
-                                        <td><fmt:formatDate value="${DTO.regdate }" pattern="YYYY-MM-dd"/></td>
-                                        <td>${DTO.writer }</td>
-                                    </tr>                  
-                                    </c:forEach>          
-                                </tbody>
-                            </table>
-                            <!-- /제품 목록 -->
-                            <div class="btn_group">
-                                <a href="${path }/Notice/NoticeForm" class="btn_black">등록</a>
-                            </div>
-                        </div>
-                    </article>
-                    <!-- /게시판관리 - 공지사항 -->
-                </section>
-
-            </div>
+		<div id="ct">        
+        <div class="ct_wrap">
+            <article id="" class="">                
+            <form action="${path }/Notice/NoticeInsert" method="post" name="databankUpload">
+                    <div class="table_form_wrap">
+                        <table class="table_form">
+                            <tbody>
+                                <tr>
+                                    <th><label for="title">제목</label></th>
+                                    <td>
+                                    	<input type="hidden" name="cus_seq" id="cus_seq" size="100" class="single100"
+                                            placeholder="작성자 입력" value="${sdto.seq }">
+                                        <input type="text" name="title" id="title" size="100" class="single100"
+                                            placeholder="글제목 입력" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th><label for="content">내용</label></th>
+                                    <td><textarea style="width: 854px" name="content" id="content" cols="100" rows="8"
+                                            class="multi100" placeholder="글 내용 입력" required></textarea></td>
+                                </tr>                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <input type="hidden" name="lock_post" value="1">
+                                        <button type="submit">등록</button>
+                                        <button type="reset">취소</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <script>
+                    function uploadFile() {
+                        window.open("/myapp/data_board/uploadForm", "dataupload", "width=400, height=300");
+                    }                    function uploadFile2() {
+                        window.open("/myapp/data_board/uploadAjax.do", "dataupload", "width=400, height=400");
+                    }
+                </script>
+            </article>
         </div>
+    </div>
+        
 
         <footer id="ft">
             <div class="ft_wrap">

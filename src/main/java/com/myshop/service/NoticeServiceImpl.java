@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.dao.NoticeDAO;
 import com.myshop.dto.NoticeDTO;
@@ -19,8 +21,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.NoticeList();
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public NoticeDTO NoticeMore(int seq) throws Exception {
+		dao.NoticeCnt(seq);
 		return dao.NoticeMore(seq);
 	}
 
@@ -33,4 +37,12 @@ public class NoticeServiceImpl implements NoticeService {
 	public void NoticeDelete(int seq) throws Exception {
 		dao.NoticeDelete(seq);	
 	}
+
+	@Override
+	public void NoticeForm(NoticeDTO DTO) throws Exception {
+		dao.NoticeForm(DTO);
+		
+	}
+	
+	
 }

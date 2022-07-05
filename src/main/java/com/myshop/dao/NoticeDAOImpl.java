@@ -35,6 +35,16 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public void NoticeDelete(int seq) throws Exception {
 		sqlSession.delete(namespace+".NoticeDelete",seq);	
 	}
+
+	@Override
+	public void NoticeForm(NoticeDTO DTO) throws Exception {
+		sqlSession.insert(namespace+".NoticeForm",DTO);
+	}
+
+	@Override
+	public void NoticeCnt(int seq) throws Exception {
+		sqlSession.update(namespace+".NoticeCnt",seq);
+	}
 	
 	
 	

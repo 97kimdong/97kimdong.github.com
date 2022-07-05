@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mpper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.myshop.NoticeMapper">
+
+<!-- 공지사항 리스트 -->
+	<select id="NoticeList" resultType="com.myshop.dto.NoticeDTO">
+		select a.*,b.name as 'Writer' from notice a
+		inner join customer b
+		on (a.cus_seq = b.seq);
+	</select>
+
+<!-- 공지사항 상세보기 -->
+	<select id="NoticeMore" resultType="com.myshop.dto.NoticeDTO" parameterType="Integer">
+		select a.*,b.name as 'Writer' from notice a
+		inner join customer b
+		on (a.cus_seq = b.seq)
+		where a.seq = #{seq}
+	</select>
+	
+<!-- 공지사항 수정 -->
+	<update id="NoticeUpdate">
+		update notice set title=#{title }, content=#{content }
+		where seq=#{seq }
+	</update>
+	
+<!-- 공지사항 삭제 -->
+	<delete id="NoticeDelete">
+		delete from notice where seq=#{seq }
+	</delete>
+</mapper>

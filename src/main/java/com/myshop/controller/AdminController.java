@@ -14,9 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.myshop.dto.CategoryDTO;
 import com.myshop.dto.CustomerDTO;
+import com.myshop.dto.NoticeDTO;
+import com.myshop.service.CategoryService;
 import com.myshop.service.CustomerService;
+import com.myshop.service.NoticeService;
 
+
+/**
+ * Handles requests for the application home page.
+ */
 @Controller
 @RequestMapping("/Admin/*")
 public class AdminController {
@@ -28,6 +36,12 @@ public class AdminController {
 	
 	@Inject
 	private CustomerService CustomerService;
+	
+	@Inject
+	private CategoryService CategoryService;
+
+	@Inject
+	private NoticeService NoticeService;
 	
 	@Inject
 	private HttpSession session;
@@ -60,21 +74,26 @@ public class AdminController {
 		return "/Admin/CusDorList";
 	}
 	
+
+		 
+
+	
 	//카테고리관리
 	@RequestMapping(value = "Category", method = RequestMethod.GET)
 	public String Category(Locale locale,Model model) throws Exception{
+		List<CategoryDTO> List = CategoryService.CategoryList();
+		model.addAttribute("List",List);
 		return "/Admin/Category";
 	}
 	
-	//제품관리
-	@RequestMapping(value = "ProductList", method = RequestMethod.GET)
-	public String ProductList(Locale locale,Model model) throws Exception{
-		return "/Admin/ProductList";
-	}
 	
-	//공지사항
+
+	
+	//공지사항리스트
 	@RequestMapping(value = "NoticeList", method = RequestMethod.GET)
 	public String NoticeList(Locale locale,Model model) throws Exception{
+		List<NoticeDTO> List = NoticeService.NoticeList();
+		model.addAttribute("List",List);
 		return "/Admin/NoticeList";
 	}
 	

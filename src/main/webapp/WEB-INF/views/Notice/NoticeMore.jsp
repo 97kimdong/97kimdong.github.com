@@ -154,7 +154,7 @@ response.setCharacterEncoding("utf-8");
         <div id="container">
             <div id="container_wrap">
 	       <section class="main_wrap">
-					<jsp:include page="./LeftMenu.jsp"/>
+					<jsp:include page="../Admin/LeftMenu.jsp"/>
                      <!-- 게시판관리 - 공지사항 -->
                     <article class="page">
                         <div class="page_content">
@@ -172,28 +172,52 @@ response.setCharacterEncoding("utf-8");
                             </div>
                             <!-- /검색 -->
                             <!-- 제품 목록 -->
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>no</th>
-                                        <th>제목</th>
-                                        <th>조회수</th>
-                                        <th>작성일</th>
-                                        <th>작성자</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<c:forEach items="${List }" var= "DTO">
-                                    <tr>
-                                        <td>${DTO.seq }</td>
-                                        <td><a href="${path }/Notice/NoticeMore?seq=${DTO.seq }">${DTO.title }</a></td>
-                                        <td>${DTO.cnt }</td>
-                                        <td><fmt:formatDate value="${DTO.regdate }" pattern="YYYY-MM-dd"/></td>
-                                        <td>${DTO.writer }</td>
-                                    </tr>                  
-                                    </c:forEach>          
-                                </tbody>
-                            </table>
+                            <h2>글 상세보기</h2>
+            <form action="${path }/Notice/NoticeUpdate" method="post">
+            <input type="hidden" name="seq" id="seq" value="${More.seq }" required >
+                <table class="table" id="table">
+                    <tbody>
+                        <tr>
+                            <th>제목</th>
+                            <td>
+                                <input type="text" name="title" value="${More.title }" required >
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>작성자</th>
+                            <td>
+                                <input type="text" name="writer" id="writer" value="${More.writer }" readonly>
+                            </td>
+                        </tr>
+                        <tr>    
+                            <th>작성일</th>
+                            <td>
+                                <input type="text" name="regdate" id="regdate" value="<fmt:formatDate value="${More.regdate }" pattern="YYYY-MM-dd" />" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>조회수</th>
+                            <td>
+                                <input type="text" name="cnt" id="cnt" value="${More.cnt }" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td>
+                                <textarea cols="100" rows ="10" name="content" id="content" required >${More.content }</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="cols">
+                                <input type="submit" value="수정" class="button is-info"/>
+                                <input type="reset" value="취소" class="button is-info"/>
+                                <a href="${path }/Notice/NoticeDelete?seq=+${More.seq }">삭제</a>
+                                <a href="${path }/Admin/NoticeList" class="button is-info">목록</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
                             <!-- /제품 목록 -->
                             <div class="btn_group">
                                 <input type="button" class="btn_black" value="등록">

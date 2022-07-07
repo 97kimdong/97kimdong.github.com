@@ -21,10 +21,15 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.NoticeList();
 	}
 
-	@Transactional(isolation = Isolation.READ_COMMITTED)
+//	@Transactional(isolation = Isolation.READ_COMMITTED)
+//	@Override
+//	public NoticeDTO NoticeMore(int seq) throws Exception {
+//		dao.NoticeCnt(seq);
+//		return dao.NoticeMore(seq);
+//	}
+	
 	@Override
 	public NoticeDTO NoticeMore(int seq) throws Exception {
-		dao.NoticeCnt(seq);
 		return dao.NoticeMore(seq);
 	}
 
@@ -41,6 +46,12 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void NoticeForm(NoticeDTO DTO) throws Exception {
 		dao.NoticeForm(DTO);
+		
+	}
+
+	@Override
+	public void NoticeCnt(int seq) throws Exception {
+		dao.NoticeCnt(seq);
 		
 	}
 	

@@ -15,4 +15,6 @@ public interface NoticeService {
 	public void NoticeUpdate(NoticeDTO DTO) throws Exception;
 	// 공지사항 삭제
 	public void NoticeDelete(int seq) throws Exception;
+	// 공지사항 조회수
+	public void NoticeCnt(int seq) throws Exception;
 }

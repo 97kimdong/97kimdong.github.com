@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.myshop.dto.CategoryDTO;
 import com.myshop.dto.CustomerDTO;
 import com.myshop.dto.NoticeDTO;
+import com.myshop.dto.Order_MasterDTO;
 import com.myshop.service.CategoryService;
 import com.myshop.service.CustomerService;
 import com.myshop.service.NoticeService;
+import com.myshop.service.Order_MasterService;
 
 
 /**
@@ -46,12 +48,17 @@ public class AdminController {
 	@Inject
 	private HttpSession session;
 	
+	@Inject 
+	private Order_MasterService OrderService;
+	
 	
 	// JSP 연결
 	
 	//오더리스트
-	@RequestMapping("OrderList")
-	public String OrderList(){
+	@RequestMapping(value = "OrderList", method = RequestMethod.GET)
+	public String OrderList(Locale locale, Model model) throws Exception{
+		List<Order_MasterDTO> List = OrderService.Order_MasterList();
+		model.addAttribute("List",List);
 		return "/Admin/OrderList";
 	}
 	

@@ -172,54 +172,16 @@ response.setCharacterEncoding("utf-8");
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach items="${List }" var="DTO">
                                     <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
+                                        <td><a href="${path }/Order/OrderDetail?order_no=${DTO.order_no}">${DTO.order_no}</a></td>
+                                        <td>${DTO.order_step }</td>
+                                        <td>${DTO.payment_status }</td>
+                                        <td>${DTO.total_price }</td>
+                                        <td>${DTO.delivery_cus }</td>
+                                        <td><fmt:formatDate value="${DTO.regdate }" pattern="YYYY-MM-dd"/></td>
                                     </tr>
-                                    <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="./orderDetail.html">197</a></td>
-                                        <td>접수중</td>
-                                        <td>입금완료</td>
-                                        <td>100, 000원</td>
-                                        <td>조재영</td>
-                                        <td>22-06-27</td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             <!-- 주문서 테이블 -->

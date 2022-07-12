@@ -1,5 +1,7 @@
 package com.myshop.controller;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -29,4 +31,9 @@ public class OrderMasterController {
 		model.addAttribute("More",More);
 		return "/Order/OrderDetail";
 	}
+	// 메뉴 디테일 테스트
+		@RequestMapping(value = "menuDetail", method = RequestMethod.GET)
+		public String menuDetail(Locale locale,Model model) throws Exception{
+			return "/Order/menuDetail";
+		}
 }

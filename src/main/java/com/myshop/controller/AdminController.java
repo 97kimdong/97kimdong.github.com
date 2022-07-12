@@ -122,6 +122,4 @@ public class AdminController {
 		return "/Admin/ReviewList";
 	}
 	
-	
-
 }

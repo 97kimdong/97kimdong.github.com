@@ -176,7 +176,7 @@ response.setCharacterEncoding("utf-8");
                             <!-- /검색 -->
                             <!-- 제품 목록 -->
                             <h2>주문내역 상세보기</h2>
-            <form action="${path }/Notice/NoticeUpdate" method="post">
+            <form action="${path }/Order/OrderUpdate" method="post">
             <input type="hidden" name="seq" id="seq" value="${More.seq }" required >
                 <table class="table" id="table">
                     <tbody>
@@ -268,17 +268,13 @@ response.setCharacterEncoding("utf-8");
                             <td colspan="3" class="cols">
                                 <input type="submit" value="수정" class="button is-info"/>
                                 <input type="reset" value="취소" class="button is-info"/>
-                                <a href="${path }/Notice/NoticeDelete?seq=+${More.seq }">삭제</a>
-                                <a href="${path }/Admin/NoticeList" class="button is-info">목록</a>
+                                <a href="${path }/Order/OrderDelete?order_no=+${More.order_no }">삭제</a>
+                                <a href="${path }/Admin/OrderList" class="button is-info">목록</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </form>
-                            <!-- /제품 목록 -->
-                            <div class="btn_group">
-                                <input type="button" class="btn_black" value="등록">
-                            </div>
                         </div>
                     </article>
                     <!-- /게시판관리 - 공지사항 -->

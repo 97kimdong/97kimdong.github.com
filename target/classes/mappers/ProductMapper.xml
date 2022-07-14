@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mpper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.myshop.ProductMapper">
+	<!-- 상품리스트 -->
+	<select id="ProductList" resultType="com.myshop.dto.ProductDTO">
+		select * from v_product order by desc
+	</select>
+	<!-- 상품 상세보기 -->
+	<select id="ProductMore" resultType="com.myshop.dto.ProductDTO" parameterType="Integer">
+		select * from v_product where seq = #{seq}
+	</select>
+	<!-- 상품 등록 -->
+	<insert id="ProductForm">
+		insert into product(pcode,state,pname,psubname,price,invt,unit,pdetail,origin,weight,guidelines,regdate)
+		values(#{pcode},#{state},#{pname},#{psubname},#{price},#{invt},#{unit},#{pdetail},#{origin},#{weight},#{guidelines},now())
+	</insert>
+	<!-- 상품 이미지 등록 -->
+	<insert id="ProductImgForm">
+		insert into product(pcode,s_img_desc,ds_img_desc,dm_img_desc)
+		values(#{pcode},#{s_img_desc},#{ds_img_desc},#{dm_img_desc})
+	</insert>
+	<!-- 상품 수정 -->
+	<update id="ProductUpdate">
+		update product
+		set state=#{state},pname=#{pname},psubname=#{psubname},
+			price=#{price},invt=#{invt},unit=#{unit},
+			pdetail=#{pdetail},origin=#{origin},weight=#{weight},
+			guidelines=#{guidelines} where seq = #{seq}
+	</update>
+	<!-- 상품 이미지 수정 -->
+	<update id="ProductImgUpdate">
+		update product
+		set s_img_desc=#{s_img_desc},ds_img_desc=#{ds_img_desc},dm_img_desc=#{dm_img_desc} where seq = #{seq}
+	</update>
+	<delete id="ProducctDelete">
+		delete from product where seq = #{seq}
+	</delete>
+</mapper>

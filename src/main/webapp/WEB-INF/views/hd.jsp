@@ -96,8 +96,6 @@
                         <ul>
                             <li class="sub"><a href="">공지사항</a></li>
                             <li class="sub"><a href="">문의게시판</a></li>
-                            <li class="sub"><a href="">동협게시판</a></li>
-                            <li class="sub"><a href="">재영게시판</a></li>
                         </ul>
                     </li>
                 </ul>
